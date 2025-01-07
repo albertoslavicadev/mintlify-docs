@@ -1,71 +1,116 @@
 ---
-title: Introduction
-description: "Welcome to the home of your new documentation"
+title: "Plumifly SDK"
+description: "Display your Plumifly blog content in React applications"
 ---
 
 <img
   className="block dark:hidden"
   src="/images/hero-light.svg"
-  alt="Hero Light"
+  alt="Plumifly SDK"
 />
 <img
   className="hidden dark:block"
   src="/images/hero-dark.svg"
-  alt="Hero Dark"
+  alt="Plumifly SDK"
 />
 
-## Setting up
+## What is Plumifly SDK?
 
-The first step to world-class documentation is setting up your editing environments.
+Plumifly SDK provides React components to display your Plumifly blog content. It handles all the data fetching and presentation, allowing you to focus on customization and integration.
 
 <CardGroup cols={2}>
   <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
+    title="Quick Install"
+    icon="bolt"
+    href="/quickstart"
   >
-    Get your docs set up locally for easy development
+    Add Plumifly components to your React project
   </Card>
   <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
+    title="Components"
+    icon="cube"
+    href="/components/blog-list"
   >
-    Preview your changes before you push to make sure they're perfect
+    Pre-built components for blog display
   </Card>
 </CardGroup>
 
-## Make it yours
+## Core Features
 
-Update your docs to your brand and add valuable content for the best user conversion.
+Everything you need to display your Plumifly blog content.
 
 <CardGroup cols={2}>
   <Card
-    title="Customize Style"
+    title="Theme System"
     icon="palette"
-    href="https://mintlify.com/docs/settings/global"
+    href="/core/theming"
   >
-    Customize your docs to your company's colors and brands
+    Customize colors, fonts, and spacing to match your brand
   </Card>
   <Card
-    title="Reference APIs"
+    title="Data Fetching"
+    icon="plug"
+    href="/core/api-client"
+  >
+    Automatic content fetching from your Plumifly blog
+  </Card>
+  <Card
+    title="TypeScript Support"
     icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
+    href="/core/typescript"
   >
-    Automatically generate endpoints from an OpenAPI spec
+    Full type definitions for better development experience
   </Card>
   <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/content/components/accordions"
+    title="Server Components"
+    icon="server"
+    href="/core/configuration"
   >
-    Build interactive features and designs to guide your users
+    Compatible with Next.js App Router and Server Components
+  </Card>
+</CardGroup>
+
+## Example Usage
+
+Display your blog content in seconds:
+
+```tsx
+import { BlogList, initPlumifly } from 'plumifly-sdk';
+
+// Initialize the SDK with your API key
+initPlumifly({
+  apiKey: 'your-api-key'
+});
+
+// Display your blog posts
+export default function BlogPage({ data }) {
+  return (
+    <BlogList 
+      data={data}
+      theme={{
+        colors: {
+          primary: '#007AFF'
+        }
+      }}
+    />
+  );
+}
+```
+
+## Next Steps
+<CardGroup cols={2}>
+  <Card
+    title="Get Started"
+    icon="arrow-down-to-line"
+    href="/installation"
+  >
+    Quick guide to set up Plumifly in your project
   </Card>
   <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
+    title="API Reference"
+    icon="book-open"
+    href="/api-reference/introduction"
   >
-    Check out our showcase of our favorite documentation
+    Learn about working with AI and custom content
   </Card>
 </CardGroup>

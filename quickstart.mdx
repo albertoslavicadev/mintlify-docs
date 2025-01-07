@@ -1,86 +1,166 @@
 ---
 title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Start integrating Plumifly blog in minutes'
 ---
 
-## Setup your development
+## Installation
 
-Learn how to update your docs locally and deploy them to the public.
+Install Plumifly SDK using your preferred package manager:
 
-### Edit and preview
+<CodeGroup>
+```bash npm
+npm install plumifly-sdk
+```
 
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
-  </Accordion>
-</AccordionGroup>
+```bash pnpm
+pnpm add plumifly-sdk
+```
 
-### Deploy your changes
+```bash yarn
+yarn add plumifly-sdk
+```
 
-<AccordionGroup>
+```bash bun
+bun add plumifly-sdk
+```
+</CodeGroup>
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
+## Framework Guides
+
+<Tabs>
+  <Tab title="Next.js">
+    ### Setting up in Next.js
+
+    1. Create a blog route with dynamic segments 
+    2. Create a client component in the same folder
+    3. Check the code examples below for implementation
+
+    That's it! Your blog is now set up with both list and post views, handling dynamic routes automatically.
+  </Tab>
+  <Tab title="React">
+    ### Setting up in React
+
+    1. Initialize the SDK in your app
+    2. Create your blog component
+    3. Add the blog to your routes
+    4. Check the code examples below for implementation
+  </Tab>
+</Tabs>
+
+## Code Examples
+
+<Accordion title="Next.js Implementation" icon="server">
+### Server Component (page.tsx)
+```tsx
+// /blog/[[...slug]]/page.tsx
+import { initPlumifly, fetchBlogPosts, fetchBlogPost } from "plumifly-sdk";
+import BlogPageClient from "./BlogPageClient";
+
+initPlumifly({
+  apiKey: "your-api-key",
+});
+
+export default async function Page(props: {
+  params: Promise<{ slug?: string[] }>;
+}) {
+  const params = await props.params;
+  let data;
+
+  if (params.slug && params.slug.length > 0) {
+    data = await fetchBlogPost(params.slug[0]);
+  } else {
+    data = await fetchBlogPosts();
+  }
+
+  return <BlogPageClient data={data} />;
+}
+```
+
+### Client Component (BlogPageClient.tsx)
+```tsx
+"use client";
+
+import React from "react";
+import { BlogList, BlogPost, BlogPageProps } from "plumifly-sdk";
+import { redirect } from "next/navigation";
+
+export default function BlogPageClient({ data }: BlogPageProps) {
+  const isPostView = data && !("blogs" in data);
+
+  return isPostView ? (
+    <BlogPost onBack={() => redirect("/blog")} post={data} />
+  ) : (
+    <BlogList data={data} />
+  );
+}
+```
 </Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
+
+<Accordion title="React Implementation" icon="react">
+```tsx
+import { useEffect, useState } from 'react';
+import { 
+  BlogList, 
+  BlogPost, 
+  fetchBlogPosts, 
+  fetchBlogPost,
+  initPlumifly 
+} from 'plumifly-sdk';
+
+// Initialize the SDK
+initPlumifly({
+  apiKey: 'your-api-key'
+});
+
+export function Blog() {
+  const [data, setData] = useState(null);
+  const [currentSlug, setCurrentSlug] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (currentSlug) {
+        const post = await fetchBlogPost(currentSlug);
+        setData(post);
+      } else {
+        const posts = await fetchBlogPosts();
+        setData(posts);
+      }
+    }
+    fetchData();
+  }, [currentSlug]);
+
+  if (!data) return <div>Loading...</div>;
+
+  return currentSlug ? (
+    <BlogPost 
+      post={data} 
+      onBack={() => setCurrentSlug(null)} 
+    />
+  ) : (
+    <BlogList 
+      data={data} 
+      onPostClick={(slug) => setCurrentSlug(slug)} 
+    />
+  );
+}
+```
 </Accordion>
 
-</AccordionGroup>
-
-## Update your docs
-
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+## Next Steps
 
 <CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
-
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
+  <Card
+    title="Customize Themes"
+    icon="palette"
+    href="/core/theming"
+  >
+    Learn how to style your blog components
+  </Card>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore available API methods
+  </Card>
 </CardGroup>
