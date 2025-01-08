@@ -33,11 +33,6 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs.plumifly.com"
-    },
-    {
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://plumifly.com/blog"
@@ -75,10 +70,8 @@
         {
           "group": "Endpoints",
           "pages": [
-            "api-reference/endpoint/get",
-            "api-reference/endpoint/create",
-            "api-reference/endpoint/update",
-            "api-reference/endpoint/delete"
+            "api-reference/endpoint/get-blogs",
+            "api-reference/endpoint/get-blog"
           ]
         }
       ]

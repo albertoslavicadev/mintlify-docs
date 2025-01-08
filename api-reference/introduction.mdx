@@ -1,33 +1,130 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'API Reference'
+description: 'Direct integration with Plumifly API'
 ---
 
+## Overview
+
+Plumifly provides a simple REST API for fetching blog content. While we recommend using our React SDK for React applications, you can use these endpoints directly for custom implementations or different frameworks.
+
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  All API requests require an API key passed in the X-API-Key header. You can get your API key from your Plumifly dashboard.
 </Note>
-
-## Welcome
-
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+```bash
+X-API-Key: plum_your_api_key
+```
+
+All API requests must include your API key in the `X-API-Key` header. Requests without a valid API key will return a 401 error.
+
+## Available Endpoints
+
+<CardGroup>
+
+<Card title="Get Blog Posts" icon="list">
+  ```bash
+  GET /api/v1/blogs
+  ```
+  Fetch all published blog posts for your project, sorted by creation date
+</Card>
+
+<Card title="Get Single Post" icon="file">
+  ```bash
+  GET /api/v1/blog/:slug
+  ```
+  Fetch a single blog post by its slug
+</Card>
+
+</CardGroup>
+
+## Response Types
+
+<Accordion title="Blog List Response">
+```typescript
+interface BlogListResponse {
+  project: {
+    id: string;
+    name: string;
+  };
+  blogs: {
+    id: string;
+    projectId: string;
+    title: string;
+    slug: string;
+    status: 'published';
+    description: string;
+    imageUrl: string | null;
+    imageAlt: string | null;
+    thumbnailMainColor: string | null;
+    thumbnailAccentColor: string | null;
+    thumbnailStyle: string | null;
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+  }[];
+}
+```
+</Accordion>
+
+<Accordion title="Single Blog Response">
+```typescript
+interface BlogPost {
+  id: string;
+  projectId: string;
+  title: string;
+  content: string;
+  slug: string;
+  status: string;
+  description: string;
+  seoKeywords: string | null;
+  imageUrl: string | null;
+  imageAlt: string | null;
+  thumbnailMainColor: string | null;
+  thumbnailAccentColor: string | null;
+  thumbnailStyle: string | null;
+  thumbnailIconSuggestion: string | null;
+  thumbnailImageLayout: string | null;
+  publishedAt: string | null;
+  scheduledFor: string | null;
+  generationStatus: string | null;
+  generationError: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+</Accordion>
+
+## Error Handling
+
+The API uses conventional HTTP response codes:
+
+<ResponseField name="200" type="Success">
+  Request completed successfully
+</ResponseField>
+
+<ResponseField name="400" type="Bad Request">
+  Invalid parameters were provided
+</ResponseField>
+
+<ResponseField name="401" type="Unauthorized">
+  Invalid or missing API key
+</ResponseField>
+
+<ResponseField name="404" type="Not Found">
+  The requested resource was not found
+</ResponseField>
+
+<ResponseField name="500" type="Server Error">
+  An unexpected server error occurred
+</ResponseField>
+
+Error responses include a message and error code:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "message": "Blog post not found",
+  "code": "NOT_FOUND"
+}
 ```
