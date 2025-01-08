@@ -1,125 +1,40 @@
 ---
-title: "Plumifly SDK"
-description: "Display your Plumifly blog content in React applications"
+title: "Plumifly"
+description: "Build powerful content experiences with Plumifly's API"
 ---
 
 <img
   className="block dark:hidden"
   src="/images/hero-light.svg"
-  alt="Plumifly SDK"
+  alt="Plumifly API"
 />
 <img
   className="hidden dark:block"
   src="/images/hero-dark.svg"
-  alt="Plumifly SDK"
+  alt="Plumifly API"
 />
 
-## What is Plumifly SDK?
+## Welcome to Plumifly
 
-Plumifly SDK provides React components to display your Plumifly blog content. It handles all the data fetching and presentation, allowing you to focus on customization and integration.
+Plumifly provides a powerful API to integrate and display your blog content across any platform. Our RESTful API gives you complete control over data fetching and presentation, allowing you to build custom solutions that perfectly match your needs.
 
 <Note>
-  While the SDK provides ready-to-use React components, we also offer a RESTful API for those who:
-  - Are not using React or Next.js
-  - Want to build custom components
-  - Need more control over data fetching and rendering
-  Check out our [API Reference](/api-reference/introduction) for direct API integration.
+  The Plumifly API is designed for developers who:
+  - Need complete control over their content integration
+  - Want to build custom solutions
+  - Are working with any frontend framework or technology
 </Note>
 
-<CardGroup cols={2}>
+<CardGroup cols={1}>
   <Card
-    title="Quick Install"
+    title="API Quick Start"
     icon="bolt"
-    href="/quickstart"
-  >
-    Add Plumifly components to your React project
-  </Card>
-  <Card
-    title="Components"
-    icon="cube"
-    href="/components/blog-list"
-  >
-    Pre-built components for blog display
-  </Card>
-</CardGroup>
-
-## Core Features
-
-Everything you need to display your Plumifly blog content.
-
-<CardGroup cols={2}>
-  <Card
-    title="Theme System"
-    icon="palette"
-    href="/core/theming"
-  >
-    Customize colors, fonts, and spacing to match your brand
-  </Card>
-  <Card
-    title="Data Fetching"
-    icon="plug"
-    href="/core/api-client"
-  >
-    Automatic content fetching from your Plumifly blog
-  </Card>
-  <Card
-    title="TypeScript Support"
-    icon="code"
-    href="/core/typescript"
-  >
-    Full type definitions for better development experience
-  </Card>
-  <Card
-    title="Server Components"
-    icon="server"
-    href="/core/configuration"
-  >
-    Compatible with Next.js App Router and Server Components
-  </Card>
-</CardGroup>
-
-## Example Usage
-
-Display your blog content in seconds:
-
-```tsx
-import { BlogList, initPlumifly } from 'plumifly-sdk';
-
-// Initialize the SDK with your API key
-initPlumifly({
-  apiKey: 'your-api-key'
-});
-
-// Display your blog posts
-export default function BlogPage({ data }) {
-  return (
-    <BlogList 
-      data={data}
-      theme={{
-        colors: {
-          primary: '#007AFF'
-        }
-      }}
-    />
-  );
-}
-```
-
-## Next Steps
-
-<CardGroup cols={2}>
-  <Card
-    title="React Quick Start"
-    icon="arrow-down-to-line"
-    href="/quickstart"
-  >
-    Set up Plumifly in your React project
-  </Card>
-  <Card
-    title="API Reference"
-    icon="book-open"
     href="/api-reference/introduction"
   >
-    Build custom solutions with our REST API
+    Start integrating with our REST API
   </Card>
 </CardGroup>
+
+<Note>
+  Looking for React components? We're currently developing an official React SDK to make integration even easier. For now, our REST API provides all the functionality you need to build custom solutions.
+</Note>

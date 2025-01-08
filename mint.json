@@ -18,7 +18,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:support@plumifly.com"
+      "url": "mailto:albertoslavica@plumifly.com"
     }
   ],
   "topbarCtaButton": {
@@ -42,25 +42,7 @@
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "installation"
-      ]
-    },
-    {
-      "group": "Core Concepts",
-      "pages": [
-        "core/configuration",
-        "core/theming",
-        "core/api-client",
-        "core/typescript"
-      ]
-    },
-    {
-      "group": "Components",
-      "pages": [
-        "components/blog-list",
-        "components/blog-post"
+        "introduction"
       ]
     },
     {
@@ -78,8 +60,6 @@
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/plumifly",
-    "twitter": "https://twitter.com/plumifly",
-    "linkedin": "https://linkedin.com/company/plumifly"
+    "github": "https://github.com/plumifly"
   }
 }
